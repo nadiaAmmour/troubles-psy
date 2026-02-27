@@ -1,0 +1,16 @@
+2026-02-25 11:48:12.822 [INFO ] eeg.cleaner.DataCleaner$ - Démarrage du nettoyage sur 3 records
+2026-02-25 11:48:12.826 [INFO ] eeg.cleaner.DataCleaner$ - Nettoyage terminé : 3 records | edu=1 IQ=0 AB=0 COH=0 imputés
+2026-02-25 11:48:12.828 [INFO ] eeg.cleaner.DataCleaner$ - Démarrage du nettoyage sur 3 records
+2026-02-25 11:48:12.836 [INFO ] eeg.cleaner.DataCleaner$ - Nettoyage terminé : 3 records | edu=0 IQ=1 AB=0 COH=0 imputés
+2026-02-25 11:48:12.843 [INFO ] eeg.normalizer.DataNormalizer$ - Démarrage de la normalisation sur 2 records
+2026-02-25 11:48:12.867 [INFO ] eeg.normalizer.DataNormalizer$ - Normalisation terminée : 2 records
+2026-02-25 11:48:12.870 [INFO ] eeg.normalizer.DataNormalizer$ - Démarrage de la normalisation sur 2 records
+2026-02-25 11:48:12.871 [INFO ] eeg.normalizer.DataNormalizer$ - Normalisation terminée : 2 records
+2026-02-25 12:15:59.100 [INFO ] eeg.cleaner.DataCleaner$ - Démarrage du nettoyage sur 3 records
+2026-02-25 12:15:59.103 [INFO ] eeg.cleaner.DataCleaner$ - Nettoyage terminé : 3 records | edu=1 IQ=0 AB=0 COH=0 imputés
+2026-02-25 12:15:59.104 [INFO ] eeg.cleaner.DataCleaner$ - Démarrage du nettoyage sur 3 records
+2026-02-25 12:15:59.104 [INFO ] eeg.cleaner.DataCleaner$ - Nettoyage terminé : 3 records | edu=0 IQ=1 AB=0 COH=0 imputés
+2026-02-25 12:15:59.106 [INFO ] eeg.normalizer.DataNormalizer$ - Démarrage de la normalisation sur 2 records
+2026-02-25 12:15:59.121 [INFO ] eeg.normalizer.DataNormalizer$ - Normalisation terminée : 2 records
+2026-02-25 12:15:59.124 [INFO ] eeg.normalizer.DataNormalizer$ - Démarrage de la normalisation sur 2 records
+2026-02-25 12:15:59.125 [INFO ] eeg.normalizer.DataNormalizer$ - Normalisation terminée : 2 records

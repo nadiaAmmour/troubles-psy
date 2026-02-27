@@ -1,0 +1,7 @@
+output/
+output.json
+target/
+.idea/
+*.iml
+.bsp/
+project/target/
