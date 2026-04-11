@@ -1,0 +1,7 @@
+*.crc
+target/
+.idea/
+*.iml
+.bsp/
+project/target/
+logs/
