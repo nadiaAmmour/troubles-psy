@@ -1,7 +1,7 @@
-output/
-output.json
+*.crc
 target/
 .idea/
 *.iml
 .bsp/
 project/target/
+logs/

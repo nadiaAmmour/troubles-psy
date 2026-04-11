@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ScalaCompilerConfiguration">
-    <option name="separateProdTestSources" value="true" />
-    <profile name="sbt 1" modules="ms1-eeg-preprocessor,ms1-eeg-preprocessor.main,ms1-eeg-preprocessor.test,troubles-psy,troubles-psy1,troubles-psy1.main,troubles-psy1.test" />
-  </component>
-</project>
