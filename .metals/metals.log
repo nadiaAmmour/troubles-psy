@@ -1,0 +1,134 @@
+2026.04.18 21:47:32 INFO  Started: Metals version 1.6.7 in folders '/Users/ilhameouhaddou/Desktop/scala_project/troubles-psy' for client Visual Studio Code 1.109.5.
+2026.04.18 21:47:32 INFO  Memory monitor started
+2026.04.18 21:47:32 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026.04.18 21:48:42 INFO  no build target found for /Users/ilhameouhaddou/Desktop/scala_project/troubles-psy/src/main/scala/eeg/normalizer/Datanormalizer.scala. Using presentation compiler with project's scala-library version: 3.3.7
+2026.04.18 21:48:42 INFO  no build target found for /Users/ilhameouhaddou/Desktop/scala_project/troubles-psy/src/main/scala/eeg/normalizer/Datanormalizer.scala. Using presentation compiler with project's scala-library version: 3.3.7
+2026.04.18 21:48:57 INFO  no build target found for /Users/ilhameouhaddou/Desktop/scala_project/troubles-psy/src/main/scala/eeg/normalizer/Datanormalizer.scala. Using presentation compiler with project's scala-library version: 3.3.7
+avr. 18, 2026 9:48:57 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+avr. 18, 2026 9:48:58 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+avr. 18, 2026 10:41:10 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+2026.04.18 22:52:37 INFO  no build target found for /Users/ilhameouhaddou/Desktop/scala_project/troubles-psy/build.sbt. Using presentation compiler with project's scala-library version: 3.3.7
+2026.04.18 22:52:37 INFO  no build target found for /Users/ilhameouhaddou/Desktop/scala_project/troubles-psy/src/main/scala/eeg/Main.scala. Using presentation compiler with project's scala-library version: 3.3.7
+2026.04.18 22:52:37 INFO  no build target found for /Users/ilhameouhaddou/Desktop/scala_project/troubles-psy/src/main/scala/eeg/model/Models.scala. Using presentation compiler with project's scala-library version: 3.3.7
+2026.04.18 22:52:39 INFO  no build target found for /Users/ilhameouhaddou/Desktop/scala_project/troubles-psy/src/main/scala/eeg/parser/CSVParser.scala. Using presentation compiler with project's scala-library version: 3.3.7
+2026.04.18 22:52:39 INFO  no build target found for /Users/ilhameouhaddou/Desktop/scala_project/troubles-psy/src/main/scala/eeg/cleaner/DataCleaner.scala. Using presentation compiler with project's scala-library version: 3.3.7
+2026.04.18 22:52:39 INFO  no build target found for /Users/ilhameouhaddou/Desktop/scala_project/troubles-psy/src/main/scala/eeg/normalizer/Datanormalizer.scala. Using presentation compiler with project's scala-library version: 3.3.7
+2026.04.18 22:52:39 INFO  no build target found for /Users/ilhameouhaddou/Desktop/scala_project/troubles-psy/src/main/scala/eeg/writer/ParquetWriter.scala. Using presentation compiler with project's scala-library version: 3.3.7
+2026.04.18 22:52:42 INFO  no build target found for /Users/ilhameouhaddou/Desktop/scala_project/troubles-psy/src/main/scala/eeg/reader/ParquetReader.scala. Using presentation compiler with project's scala-library version: 3.3.7
+2026.04.18 22:52:42 INFO  no build target found for /Users/ilhameouhaddou/Desktop/scala_project/troubles-psy/src/test/scala/eeg/MS1tests.scala. Using presentation compiler with project's scala-library version: 3.3.7
+2026.04.18 22:52:47 INFO  no build target found for /Users/ilhameouhaddou/Desktop/scala_project/troubles-psy/project/plugins.sbt. Using presentation compiler with project's scala-library version: 3.3.7
+avr. 18, 2026 10:53:35 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleNotification
+WARNING: Notification threw an exception: {
+  "jsonrpc": "2.0",
+  "method": "metals/didFocusTextDocument",
+  "params": [
+    "_claude_vscode_fs_right:/Users/ilhameouhaddou/Desktop/scala_project/troubles-psy/build.sbt"
+  ]
+}
+java.lang.IllegalArgumentException: Illegal character in scheme name at index 0: _claude_vscode_fs_right:/Users/ilhameouhaddou/Desktop/scala_project/troubles-psy/build.sbt
+	at java.base/java.net.URI.create(URI.java:932)
+	at scala.meta.internal.mtags.MtagsEnrichments$XtensionStringMtags.toAbsolutePath(MtagsEnrichments.scala:209)
+	at scala.meta.internal.metals.MetalsEnrichments$XtensionString.toAbsolutePath(MetalsEnrichments.scala:787)
+	at scala.meta.internal.metals.MetalsEnrichments$XtensionString.toAbsolutePath(MetalsEnrichments.scala:784)
+	at scala.meta.internal.metals.WorkspaceLspService.didFocus(WorkspaceLspService.scala:808)
+	at scala.meta.metals.lsp.DelegatingScalaService.didFocus(DelegatingScalaService.scala:42)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$recursiveFindRpcMethods$0(GenericEndpoint.java:65)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.notify(GenericEndpoint.java:160)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleNotification(RemoteEndpoint.java:225)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:192)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:189)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:97)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:97)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+Caused by: java.net.URISyntaxException: Illegal character in scheme name at index 0: _claude_vscode_fs_right:/Users/ilhameouhaddou/Desktop/scala_project/troubles-psy/build.sbt
+	at java.base/java.net.URI$Parser.fail(URI.java:2995)
+	at java.base/java.net.URI$Parser.checkChars(URI.java:3166)
+	at java.base/java.net.URI$Parser.checkChar(URI.java:3176)
+	at java.base/java.net.URI$Parser.parse(URI.java:3191)
+	at java.base/java.net.URI.<init>(URI.java:645)
+	at java.base/java.net.URI.create(URI.java:930)
+	... 19 more
+
+2026.04.18 22:53:35 INFO  no build target found for /Users/ilhameouhaddou/Desktop/scala_project/troubles-psy/build.sbt. Using presentation compiler with project's scala-library version: 3.3.7
+2026.04.18 22:53:35 INFO  no build target found for /Users/ilhameouhaddou/Desktop/scala_project/troubles-psy/build.sbt. Using presentation compiler with project's scala-library version: 3.3.7
+2026.04.18 22:53:35 WARN  Could not find semantic tokens for: file:///Users/ilhameouhaddou/Desktop/scala_project/troubles-psy/build.sbt
+2026.04.18 23:15:21 INFO  no build target found for /Users/ilhameouhaddou/Desktop/scala_project/troubles-psy/build.sbt. Using presentation compiler with project's scala-library version: 3.3.7
+2026.04.18 23:15:36 INFO  no build target found for /Users/ilhameouhaddou/Desktop/scala_project/troubles-psy/build.sbt. Using presentation compiler with project's scala-library version: 3.3.7
+avr. 18, 2026 11:15:36 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleNotification
+WARNING: Notification threw an exception: {
+  "jsonrpc": "2.0",
+  "method": "metals/didFocusTextDocument",
+  "params": [
+    "_claude_vscode_fs_right:/Users/ilhameouhaddou/Desktop/scala_project/troubles-psy/build.sbt"
+  ]
+}
+java.lang.IllegalArgumentException: Illegal character in scheme name at index 0: _claude_vscode_fs_right:/Users/ilhameouhaddou/Desktop/scala_project/troubles-psy/build.sbt
+	at java.base/java.net.URI.create(URI.java:932)
+	at scala.meta.internal.mtags.MtagsEnrichments$XtensionStringMtags.toAbsolutePath(MtagsEnrichments.scala:209)
+	at scala.meta.internal.metals.MetalsEnrichments$XtensionString.toAbsolutePath(MetalsEnrichments.scala:787)
+	at scala.meta.internal.metals.MetalsEnrichments$XtensionString.toAbsolutePath(MetalsEnrichments.scala:784)
+	at scala.meta.internal.metals.WorkspaceLspService.didFocus(WorkspaceLspService.scala:808)
+	at scala.meta.metals.lsp.DelegatingScalaService.didFocus(DelegatingScalaService.scala:42)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$recursiveFindRpcMethods$0(GenericEndpoint.java:65)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.notify(GenericEndpoint.java:160)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleNotification(RemoteEndpoint.java:225)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:192)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:189)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:97)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:97)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+Caused by: java.net.URISyntaxException: Illegal character in scheme name at index 0: _claude_vscode_fs_right:/Users/ilhameouhaddou/Desktop/scala_project/troubles-psy/build.sbt
+	at java.base/java.net.URI$Parser.fail(URI.java:2995)
+	at java.base/java.net.URI$Parser.checkChars(URI.java:3166)
+	at java.base/java.net.URI$Parser.checkChar(URI.java:3176)
+	at java.base/java.net.URI$Parser.parse(URI.java:3191)
+	at java.base/java.net.URI.<init>(URI.java:645)
+	at java.base/java.net.URI.create(URI.java:930)
+	... 19 more
+
+2026.04.18 23:15:36 INFO  no build target found for /Users/ilhameouhaddou/Desktop/scala_project/troubles-psy/build.sbt. Using presentation compiler with project's scala-library version: 3.3.7
+2026.04.18 23:15:36 WARN  Could not find semantic tokens for: file:///Users/ilhameouhaddou/Desktop/scala_project/troubles-psy/build.sbt
+2026.04.18 23:26:32 INFO  no build target found for /Users/ilhameouhaddou/Desktop/scala_project/troubles-psy/build.sbt. Using presentation compiler with project's scala-library version: 3.3.7
+avr. 19, 2026 12:50:17 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+avr. 19, 2026 12:51:17 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+avr. 19, 2026 12:51:32 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+avr. 19, 2026 12:53:02 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+avr. 19, 2026 12:53:12 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+avr. 19, 2026 12:53:37 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+avr. 19, 2026 12:59:52 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+avr. 19, 2026 12:59:52 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+avr. 19, 2026 12:59:52 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+avr. 19, 2026 12:59:52 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+avr. 19, 2026 12:59:52 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+avr. 19, 2026 12:59:52 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+avr. 19, 2026 1:00:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+avr. 19, 2026 4:58:25 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
