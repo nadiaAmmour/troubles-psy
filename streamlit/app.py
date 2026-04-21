@@ -5,18 +5,18 @@ import streamlit as st
 import plotly.graph_objects as go
 import plotly.express as px
 
-# ──────────────────────────────────────────────────────────
+# --------------------
 # Page
-# ──────────────────────────────────────────────────────────
+# --------------------
 st.set_page_config(
     page_title="EEG – Prédictions ML",
     page_icon="🧠",
     layout="wide",
 )
 
-# ──────────────────────────────────────────────────────────
+# --------------------
 # Chemins
-# ──────────────────────────────────────────────────────────
+# --------------------
 ROOT         = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 PARQUET_PATH = os.path.join(ROOT, "output", "datasetpredection.parquet")
 
@@ -30,12 +30,13 @@ DISORDER_COLORS = {
     "Anxiety disorder":                    "#FFF176",
 }
 
-# ──────────────────────────────────────────────────────────
+# --------------------
 # Chargement
-# ──────────────────────────────────────────────────────────
+# --------------------
 @st.cache_data
 def load_data() -> pd.DataFrame:
     df = pd.read_parquet(PARQUET_PATH)
+    df = df.sample(50, random_state=42)
     # Dénormalisation approximative pour affichage lisible
     df["age_ans"]   = (df["age"]       * (71.88 - 18) + 18).round(0).astype(int)
     df["edu_ans"]   = (df["education"] * 20).round(0).astype(int)
@@ -45,9 +46,9 @@ def load_data() -> pd.DataFrame:
     df["correct"]   = df["is_patient_true"] == df["is_patient_pred"]
     return df
 
-# ──────────────────────────────────────────────────────────
+# --------------------
 # Carte de prédiction
-# ──────────────────────────────────────────────────────────
+# --------------------
 def render_card(p: pd.Series):
     is_sick      = int(p["is_patient_pred"]) == 1
     disorder     = p["predicted_disorder"]
@@ -107,22 +108,22 @@ def render_card(p: pd.Series):
     </div>
     """, unsafe_allow_html=True)
 
-# ──────────────────────────────────────────────────────────
+# --------------------
 # APP
-# ──────────────────────────────────────────────────────────
+# --------------------
 st.markdown("""
 <h1 style='margin-bottom:0;'>🧠 EEG – Prédictions Psychiatriques</h1>
 """, unsafe_allow_html=True)
 st.divider()
 
-# ── Chargement ──────────────────────────────────────────
+# ── Chargement 
 try:
     df = load_data()
 except FileNotFoundError:
     st.error(f"Fichier introuvable : `{PARQUET_PATH}`\n\nLancez MS1 puis le notebook ML.")
     st.stop()
 
-# ── Sidebar : filtres + stats ────────────────────────────
+# ── Sidebar : filtres + stats 
 with st.sidebar:
     st.header("Filtres")
 
@@ -143,31 +144,6 @@ with st.sidebar:
     )
 
     filtre_correct = st.checkbox("Uniquement les prédictions correctes", value=False)
-
-    st.divider()
-    st.header("Statistiques")
-    n_total  = len(df)
-    n_sick   = (df["is_patient_pred"] == 1).sum()
-    accuracy = df["correct"].mean()
-
-    st.metric("Total patients",       f"{n_total:,}")
-    st.metric("Diagnostiqués malades", f"{n_sick:,}")
-    st.metric("Précision Modèle 1",   f"{accuracy:.1%}")
-    st.divider()
-
-    disorder_counts = df["predicted_disorder"].value_counts()
-    fig_pie = px.pie(
-        values=disorder_counts.values,
-        names=disorder_counts.index,
-        color=disorder_counts.index,
-        color_discrete_map=DISORDER_COLORS,
-        hole=0.4,
-        title="Troubles prédits",
-    )
-    fig_pie.update_layout(margin=dict(t=30, b=0, l=0, r=0),
-                          legend=dict(font=dict(size=9)))
-    fig_pie.update_traces(textinfo="percent", textfont_size=10)
-    st.plotly_chart(fig_pie, use_container_width=True)
 
 # ── Application des filtres ──────────────────────────────
 filtered = df.copy()
@@ -214,13 +190,6 @@ with col_nav:
     st.markdown("<br>", unsafe_allow_html=True)
     col_prev, col_next = st.columns(2)
     idx_current = patient_ids.index(selected_id)
-
-    if col_prev.button("⬅ Préc.", use_container_width=True):
-        selected_id = patient_ids[max(0, idx_current - 1)]
-        st.rerun()
-    if col_next.button("Suiv. ➡", use_container_width=True):
-        selected_id = patient_ids[min(len(patient_ids) - 1, idx_current + 1)]
-        st.rerun()
 
 st.divider()
 

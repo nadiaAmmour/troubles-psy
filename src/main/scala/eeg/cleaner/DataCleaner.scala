@@ -3,37 +3,42 @@ package eeg.cleaner
 import com.typesafe.scalalogging.LazyLogging
 import eeg.model.{CleanedEEGRecord, RawEEGRecord}
 
+
 object DataCleaner extends LazyLogging {
 
-  private val MIN_AB_COVERAGE  = 0.8
-  private val MIN_COH_COVERAGE = 0.5
+  // seuils minimum 
+  private val MIN_AB_COVERAGE  = 0.8  // 80% features AB obligatoires
+  private val MIN_COH_COVERAGE = 0.5  // 50% features COH obligatoires
 
   case class CleaningReport(
-                             totalInput:         Int,
-                             totalOutput:        Int,
-                             removedRecords:     Int,
-                             educationImputed:   Int,
-                             iqImputed:          Int,
-                             abFeaturesImputed:  Int,
-                             cohFeaturesImputed: Int
-                           )
+    totalInput:         Int,
+    totalOutput:        Int,
+    removedRecords:     Int,
+    educationImputed:   Int,
+    iqImputed:          Int,
+    abFeaturesImputed:  Int,
+    cohFeaturesImputed: Int
+  )
+
 
   def clean(records: List[RawEEGRecord]): (List[CleanedEEGRecord], CleaningReport) = {
+
     logger.info(s"Démarrage du nettoyage sur ${records.size} records")
 
+  
     val medianEducation = computeMedianInt(records.flatMap(_.education))
     val medianIQ        = computeMedianInt(records.flatMap(_.iq))
-    val maxAbCols       = records.map(_.abFeatures.size).maxOption.getOrElse(0)
-    val maxCohCols      = records.map(_.cohFeatures.size).maxOption.getOrElse(0)
-    val allAbKeys       = records.flatMap(_.abFeatures.keys).distinct
-    val allCohKeys      = records.flatMap(_.cohFeatures.keys).distinct
-    val abMeans         = computeColumnMeans(records.map(_.abFeatures), allAbKeys)
-    val cohMeans        = computeColumnMeans(records.map(_.cohFeatures), allCohKeys)
 
-    val (validRaw, tooIncomplete) = records.partition { r =>
-      r.abFeatures.size.toDouble  / maxAbCols.max(1)  >= MIN_AB_COVERAGE &&
-        r.cohFeatures.size.toDouble / maxCohCols.max(1) >= MIN_COH_COVERAGE
-    }
+    val maxAbCols  = records.map(_.abFeatures.size).maxOption.getOrElse(0)
+    val maxCohCols = records.map(_.cohFeatures.size).maxOption.getOrElse(0)
+    val allAbKeys  = records.flatMap(_.abFeatures.keys).distinct
+    val allCohKeys = records.flatMap(_.cohFeatures.keys).distinct
+
+  
+    val abMeans  = computeColumnMeans(records.map(_.abFeatures), allAbKeys)
+    val cohMeans = computeColumnMeans(records.map(_.cohFeatures), allCohKeys)
+
+
 
     if (tooIncomplete.nonEmpty)
       logger.warn(s"${tooIncomplete.size} records supprimés (couverture insuffisante)")
@@ -44,8 +49,11 @@ object DataCleaner extends LazyLogging {
     var cohImputed       = 0
 
     val cleaned = validRaw.map { r =>
+
+      // imputation par médiane si valeur absente 
       val edu = r.education.getOrElse { educationImputed += 1; medianEducation }
       val iq  = r.iq.getOrElse { iqImputed += 1; medianIQ }
+
 
       val abComplete = allAbKeys.map { key =>
         r.abFeatures.get(key) match {
@@ -76,14 +84,18 @@ object DataCleaner extends LazyLogging {
     }
 
     logger.info(s"Nettoyage terminé : ${cleaned.size} records | edu=$educationImputed IQ=$iqImputed AB=$abImputed COH=$cohImputed imputés")
-    (cleaned, CleaningReport(records.size, cleaned.size, tooIncomplete.size, educationImputed, iqImputed, abImputed, cohImputed))
+
+    (cleaned, CleaningReport(records.size, cleaned.size, tooIncomplete.size,
+      educationImputed, iqImputed, abImputed, cohImputed))
   }
+
 
   private def normalizeSex(raw: String): String = raw.trim.toUpperCase match {
     case "M" | "MALE"   => "M"
     case "F" | "FEMALE" => "F"
     case other          => logger.warn(s"Sexe inattendu : '$other'"); other
   }
+
 
   private def computeMedianInt(values: List[Int]): Int = {
     if (values.isEmpty) return 0
@@ -93,9 +105,9 @@ object DataCleaner extends LazyLogging {
   }
 
   private def computeColumnMeans(
-                                  featureMaps: List[Map[String, Double]],
-                                  allKeys:     List[String]
-                                ): Map[String, Double] =
+    featureMaps: List[Map[String, Double]],
+    allKeys:     List[String]
+  ): Map[String, Double] =
     allKeys.map { key =>
       val values = featureMaps.flatMap(_.get(key))
       key -> (if (values.isEmpty) 0.0 else values.sum / values.size)

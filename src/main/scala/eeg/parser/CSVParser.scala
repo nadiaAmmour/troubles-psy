@@ -7,45 +7,51 @@ import eeg.model.RawEEGRecord
 import java.io.File
 import scala.util.{Failure, Success, Try}
 
+//  Lit le fichier CSV et retourne les données brutes
 object CSVParser extends LazyLogging {
 
   private val AB_PREFIX  = "AB."
   private val COH_PREFIX = "COH."
 
   def parse(filePath: String): (List[RawEEGRecord], Int) = {
+
     logger.info(s"Démarrage du parsing : $filePath")
 
     val file = new File(filePath)
-    if (!file.exists()) throw new IllegalArgumentException(s"Fichier introuvable : $filePath")
+    if (!file.exists())
+      throw new IllegalArgumentException(s"Fichier introuvable : $filePath")
 
     val reader = CSVReader.open(file)
+
     try {
       val allRows = reader.allWithHeaders()
-      logger.info(s"${allRows.length} lignes trouvées dans le CSV")
 
+      // détection  EEG par leur préfixe
       val sampleHeaders = allRows.headOption.map(_.keys.toList).getOrElse(List.empty)
       val abCols  = sampleHeaders.filter(_.startsWith(AB_PREFIX))
       val cohCols = sampleHeaders.filter(_.startsWith(COH_PREFIX))
-      logger.info(s"Features AB: ${abCols.size}, Features COH: ${cohCols.size}")
 
       var skipped = 0
+
+      //   on ignore les lignes invalides
       val records = allRows.flatMap { row =>
         parseRow(row, abCols, cohCols) match {
           case Success(record) => Some(record)
           case Failure(ex) =>
-            logger.warn(s"Ligne ignorée (id=${row.getOrElse("no.", "?")}) : ${ex.getMessage}")
             skipped += 1
             None
         }
       }
 
-      logger.info(s"Parsing terminé : ${records.size} records valides, $skipped ignorés")
       (records, skipped)
+
     } finally {
+     
       reader.close()
     }
   }
 
+  // capture les erreurs sans crasher le programme
   private def parseRow(
     row:     Map[String, String],
     abCols:  List[String],
@@ -56,8 +62,8 @@ object CSVParser extends LazyLogging {
       sex              = parseRequiredString(row, "sex"),
       age              = parseRequiredDouble(row, "age"),
       eegDate          = parseRequiredString(row, "eeg.date"),
-      education        = parseOptionalInt(row, "education"),
-      iq               = parseOptionalInt(row, "IQ"),
+      education        = parseOptionalInt(row, "education"), // optionnel → Option[Int]
+      iq               = parseOptionalInt(row, "IQ"),        // optionnel → Option[Int]
       mainDisorder     = parseRequiredString(row, "main.disorder"),
       specificDisorder = parseRequiredString(row, "specific.disorder"),
       abFeatures       = extractNumericFeatures(row, abCols),
@@ -73,21 +79,22 @@ object CSVParser extends LazyLogging {
 
   private def parseRequiredInt(row: Map[String, String], col: String): Int = {
     val raw = parseRequiredString(row, col)
-    raw.toIntOption.getOrElse(throw new RuntimeException(s"Valeur non entière pour $col : '$raw'"))
+    raw.toIntOption.getOrElse(throw new RuntimeException(s"Valeur non entière : '$raw'"))
   }
 
+  //  None si absent ou NA 
   private def parseOptionalInt(row: Map[String, String], col: String): Option[Int] =
     row.get(col).map(_.trim).flatMap {
       case "" | "NA" | "N/A" | "null" => None
       case v => v.toIntOption
     }
 
-
   private def parseRequiredDouble(row: Map[String, String], col: String): Double = {
     val raw = parseRequiredString(row, col)
-    raw.toDoubleOption.getOrElse(throw new RuntimeException(s"Valeur non numérique pour $col : '$raw'"))
+    raw.toDoubleOption.getOrElse(throw new RuntimeException(s"Valeur non numérique : '$raw'"))
   }
 
+  // extrait les features EEG et ignore les valeurs vides ou NA
   private def extractNumericFeatures(
     row:  Map[String, String],
     cols: List[String]
